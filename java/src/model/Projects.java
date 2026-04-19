@@ -2,9 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
-public class Projects {
-	private int projectId;
-	private String name;
+public class Projects extends BaseName implements DateRange, Stateable {
 	private String description;
 	private LocalDate startDate;
 	private LocalDate endDate;
@@ -14,44 +12,14 @@ public class Projects {
 	public Projects() {
 	}
 
-	public Projects(int projectId, String name, String description, LocalDate startDate, LocalDate endDate, String status,
+	public Projects(int id, String name, String description, LocalDate startDate, LocalDate endDate, String status,
 			int categoryId) {
-		setProjectId(projectId);
-		setName(name);
+		super(id, name);
 		setDescription(description);
 		setStartDate(startDate);
 		setEndDate(endDate);
 		setStatus(status);
 		setCategoryId(categoryId);
-	}
-
-	public int getProjectId() {
-		return projectId;
-	}
-
-	public void setProjectId(int projectId) {
-		if (projectId <= 0) {
-			System.out.println("Id del proyecto inválido");
-			return;
-		} else {
-			this.projectId = projectId;
-		}
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		if (name == null || name.trim().isEmpty()) {
-			System.out.println("El nombre no puede estar vacío");
-			return;
-		} else if (name.length() > 100) {
-			System.out.println("El nombre es demasiado largo");
-			return;
-		} else {
-			this.name = name;
-		}
 	}
 
 	public String getDescription() {
@@ -67,6 +35,7 @@ public class Projects {
 		}
 	}
 
+	@Override
 	public LocalDate getStartDate() {
 		return startDate;
 	}
@@ -80,6 +49,7 @@ public class Projects {
 		}
 	}
 
+	@Override
 	public LocalDate getEndDate() {
 		return endDate;
 	}
@@ -92,10 +62,12 @@ public class Projects {
 		this.endDate = endDate;
 	}
 
+	@Override
 	public String getStatus() {
 		return status;
 	}
 
+	@Override
 	public void setStatus(String status) {
 		if (!status.equals("Finalizado") && !status.equals("En ejecución") && !status.equals("Planificado")) {
 			System.out.println("Estado inválido");
