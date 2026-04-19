@@ -1,7 +1,6 @@
 package model;
 
-public class Participations {
-	private int participationId;
+public class Participations extends BaseEntity {
 	private int projectId;
 	private int personId;
 	private int projectRoleId;
@@ -9,24 +8,11 @@ public class Participations {
 	public Participations() {
 	}
 
-	public Participations(int participationId, int projectId, int personId, int projectRoleId) {
-		setParticipationId(participationId);
+	public Participations(int id, int projectId, int personId, int projectRoleId) {
+		super(id);
 		setProjectId(projectId);
 		setPersonId(personId);
 		setProjectRoleId(projectRoleId);
-	}
-
-	public int getParticipationId() {
-		return participationId;
-	}
-
-	public void setParticipationId(int participationId) {
-		if (participationId <= 0) {
-			System.out.println("Id de la participación inválido");
-			return;
-		} else {
-			this.participationId = participationId;
-		}
 	}
 
 	public int getProjectId() {
