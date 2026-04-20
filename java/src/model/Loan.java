@@ -2,48 +2,61 @@ package model;
 
 import java.time.LocalDate;
 
-public class Loan {
+public class Loan extends BaseEntity implements Stateable, DateRange{
+    private String status;
+    private int personId;
+    private int resourceId;
+	private LocalDate deliverytDate;
+	private LocalDate bookDate;
 
-    private int idLoan;
-    private LocalDate dueDate;
-    private String bookStatus;
-
-    public Loan(int idLoan, LocalDate dueDate, String bookStatus) {
-        this.idLoan = idLoan;
-        this.dueDate = dueDate;
-        this.bookStatus = bookStatus;
+    public Loan(int id, String status, int personId, int resourceId, LocalDate deliverytDate,
+            LocalDate bookDate) {
+        super(id);
+        this.status = status;
+        this.personId = personId;
+        this.resourceId = resourceId;
+        this.deliverytDate = deliverytDate;
+        this.bookDate = bookDate;
     }
 
-    public Loan() {
+    @Override
+    public String getStatus() {
+        return status;
     }
 
-    public int getIdLoan() {
-        return idLoan;
+    @Override
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public void setIdLoan(int idLoan) {
-        this.idLoan = idLoan;
+    public int getPersonId() {
+        return personId;
     }
 
-    public LocalDate getDueDate() {
-        return dueDate;
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
+    public int getResourceId() {
+        return resourceId;
     }
 
-    public String getBookStatus() {
-        return bookStatus;
+    public void setResourceId(int resourceId) {
+        this.resourceId = resourceId;
     }
 
-    public void setBookStatus(String bookStatus) {
-        this.bookStatus = bookStatus;
+    @Override
+    public LocalDate getEndDate() {
+        return deliverytDate;
     }
 
-    
+    @Override
+    public LocalDate getStartDate() {
+        return bookDate;
+    }
 
-    
-    
+    public void setBookDate(LocalDate bookDate) {
+        this.bookDate = bookDate;
+    }
     
 }
