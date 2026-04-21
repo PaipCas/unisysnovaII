@@ -5,6 +5,8 @@ import model.Maintenance;
 import model.Participations;
 import model.Projects;
 import model.Roles;
+import model.Person;
+import model.Sponsor;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -71,11 +73,17 @@ public class App {
 				case 4:
 				rolesMenu();
 				break;
+				case 5:
+				personMenu();
+				break;
 				case 6:
 				loanMenu();
 				break;
 				case 8:
 				maintenanceMenu();
+				break;
+				case 10:
+				sponsorMenu();
 				break;
 				case 12:
 				System.out.println("Saliendo del sistema...");
@@ -353,7 +361,91 @@ public class App {
 			}
 			
 		} while (option != 3);
+
 	}
+    private static void createPerson() {
+    System.out.println("\n--- Crear Persona ---");
+
+    Person p = new Person();
+
+    System.out.print("Nombre: ");
+    p.setName(scanner.nextLine());
+
+    System.out.print("Apellido: ");
+    p.setLastName(scanner.nextLine());
+
+    System.out.print("Email: ");
+    p.setEmail(scanner.nextLine());
+
+    p.show();
+}
+
+	private static void personMenu() {
+    int option;
+
+    do {
+        System.out.println("\n===== PERSON MENU =====");
+        System.out.println("1. Create Person");
+        System.out.println("2. Back");
+        System.out.print("Select an option: ");
+
+        option = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (option) {
+            case 1:
+                createPerson();
+                break;
+            case 2:
+                break;
+            default:
+                System.out.println("Invalid option");
+        }
+
+    } while (option != 2);
+}
+
+private static void createSponsor() {
+    System.out.println("\n--- Crear Patrocinador ---");
+
+    Sponsor s = new Sponsor();
+
+    System.out.print("Nombre: ");
+    s.setName(scanner.nextLine());
+
+    System.out.print("Tipo: ");
+    s.setType(scanner.nextLine());
+
+    System.out.print("Email: ");
+    s.setEmail(scanner.nextLine());
+
+    s.show();
+}
+
+private static void sponsorMenu() {
+    int option;
+
+    do {
+        System.out.println("\n===== SPONSOR MENU =====");
+        System.out.println("1. Create Sponsor");
+        System.out.println("2. Back");
+        System.out.print("Select an option: ");
+
+        option = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (option) {
+            case 1:
+                createSponsor();
+                break;
+            case 2:
+                break;
+            default:
+                System.out.println("Invalid option");
+        }
+
+    } while (option != 2);
+}
 	
 	// Función para crear roles
 	private static void createRole() {
