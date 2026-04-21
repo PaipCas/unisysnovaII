@@ -1,5 +1,7 @@
 
 import model.Categories;
+import model.Loan;
+import model.Maintenance;
 import model.Participations;
 import model.Projects;
 import model.Roles;
@@ -17,10 +19,16 @@ public class App {
 	private static List<Categories> categoriesList = new ArrayList<>();
 	private static List<Participations> participationsList = new ArrayList<>();
 	private static List<Roles> rolesList = new ArrayList<>();
+	private static List<Loan> loanList = new ArrayList<>();
+	private static List<Maintenance> maintenancesList = new ArrayList<>();
+	private static int maintenanceId = 0;
 	private static int projectId = 0;
 	private static int categoryId = 0;
 	private static int participationId = 0;
 	private static int roleId = 0;
+	private static int idLoan =0;
+	
+
 	
 	// Inicio, general
 	public static void main(String[] args) throws Exception {
@@ -62,6 +70,12 @@ public class App {
 				break;
 				case 4:
 				rolesMenu();
+				break;
+				case 6:
+				loanMenu();
+				break;
+				case 8:
+				maintenanceMenu();
 				break;
 				case 12:
 				System.out.println("Saliendo del sistema...");
@@ -357,7 +371,7 @@ public class App {
 		System.out.println("Rol creado correctamente.");
 	}
 	
-	// Función para listar participaciones
+	// Función para listar roles
 	private static void listRoles() {
 		System.out.println("\n--- Lista de Roles ---");
 		
@@ -372,4 +386,170 @@ public class App {
 			System.out.println("Nombre: " + r.getName());
 		}
 	}
+
+	//PRESTAMOS
+	//Función para ejecutar el menú de los prestamos
+	private static void loanMenu() {
+		int option;
+
+		do {
+			System.out.println("\\n===== MENÚ DE PARTICIPACIONES =====");
+			System.out.println("1. Crear préstamo");
+			System.out.println("2. Listar préstamos");
+			System.out.println("3. Volver al menú general");
+			System.out.print("Seleccione una opción: ");
+
+			option = scanner.nextInt();
+			scanner.nextLine();
+
+			switch (option) {
+				case 1:
+				createLoan();
+				break;
+				case 2:
+				listLoan();
+				break;
+				case 3:
+				generalMenu();
+				break;
+				default:
+				System.out.println("Opción inválida");
+			}
+			
+		} while (option != 3);
+
+	}
+
+	//Función para crear prestamos
+	private static void createLoan() {
+		System.out.println("\n--- Crear Nuevo Prestamo ---");
+		
+		int id = idLoan++;
+		
+		System.out.print("ID recurso: ");
+		int resourceId = scanner.nextInt();
+
+		System.out.println("ID persona");
+		int personId = scanner.nextInt();
+		
+		System.out.print("Fecha de entrega (dd/mm/aaaa): ");
+		LocalDate deliverytDate = LocalDate.parse(scanner.nextLine(), formatter);
+		
+		System.out.print("Fecha de reserva (dd/mm/aaaa): ");
+		LocalDate bookDate = LocalDate.parse(scanner.nextLine(), formatter);
+		
+		System.out.print("Estado: ");
+		String status = scanner.nextLine();
+		
+		Loan loan = new Loan(id, status, personId, resourceId, deliverytDate, bookDate);
+		
+		loanList.add(loan);
+		
+		System.out.println("Prestamo creado correctamente.");
+	}
+
+	// Función para listar prestamos
+	private static void listLoan() {
+		System.out.println("\n--- Lista de Prestamos ---");
+		
+		if (loanList.isEmpty()) {
+			System.out.println("No hay prestamos registrados.");
+			return;
+		}
+		
+		for (Loan l : loanList) {
+			System.out.println("-----------------------------");
+			System.out.println("ID: " + l.getId());
+			System.out.println("ID recurso: " + l.getResourceId());
+			System.out.println("ID persona: " + l.getPersonId());
+			System.out.println("Fecha de entrega: " + l.getEndDate());
+			System.out.println("Fecha reserva: " + l.getStartDate());
+			System.out.println("Estado: " + l.getStatus());
+		}
+	}
+
+	// MANTENIMIENTO
+	// Función para ejecutar el menú de mantenimientos
+	private static void maintenanceMenu() {
+		int option;
+		
+		do {
+			System.out.println("\n===== MENÚ DE MANTENIMIENTO =====");
+			System.out.println("1. Crear mantenimiento");
+			System.out.println("2. Listar mantenimientos");
+			System.out.println("3. Volver al menú general");
+			System.out.print("Seleccione una opción: ");
+			
+			option = scanner.nextInt();
+			scanner.nextLine();
+			
+			switch (option) {
+				case 1:
+				createMaintenance();
+				break;
+				case 2:
+				listMaintenance();
+				break;
+				case 3:
+				generalMenu();
+				break;
+				default:
+				System.out.println("Opción inválida");
+			}
+			
+		} while (option != 3);
+
+	}
+	// Función para crear mantenimientos
+	private static void createMaintenance() {
+		System.out.println("\n--- Crear Nuevo Mantenimiento ---");
+		
+		int id = maintenanceId++;
+		
+		System.out.print("Tecnico responsable: ");
+		String technician = scanner.nextLine();
+
+		System.out.print("Fecha de mantenimiento (dd/mm/aaaa): ");
+		LocalDate maintenanceDate = LocalDate.parse(scanner.nextLine(), formatter);
+		
+		System.out.println("Descripcion");
+		String descriptionMaint = scanner.nextLine();
+		
+		System.out.println("Costo");
+		double cost = scanner.nextDouble();
+		
+		System.out.print("ID recurso: ");
+		int resourceId = scanner.nextInt();
+
+		
+		Maintenance maintenance = new Maintenance(id, technician, maintenanceDate, descriptionMaint, cost, resourceId);
+		
+		maintenancesList.add(maintenance);
+		
+		System.out.println("Mantenimiento creado correctamente.");
+	}
+	
+	// Función para listar mantenimiento
+	private static void listMaintenance() {
+		System.out.println("\n--- Lista de Mantenimientos ---");
+		
+		if (maintenancesList.isEmpty()) {
+			System.out.println("No hay mantenimientos registrados.");
+			return;
+		}
+		
+		for (Maintenance m : maintenancesList) {
+			System.out.println("-----------------------------");
+			System.out.println("ID: " + m.getId());
+			System.out.println("Tecnico responsable: " + m.getTechnician());
+			System.out.println("Fecha de mantenimiento: "+ m.getMaintenanceDate());
+			System.out.println("Descripcion: " + m.getDescriptionMaint());
+			System.out.println("Costo: " + m.getCost());
+			System.out.println("ID recurso: " + m.getResourceId());
+
+		}
+	}
+
+	
+
 }

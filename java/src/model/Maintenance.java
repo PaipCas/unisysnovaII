@@ -1,49 +1,41 @@
 package model;
 
-public class Maintenance {
+import java.time.LocalDate;
 
-    private String technResponsable;
-    private int idMaintenance;
-    private String MaintenanceDate;
+public class Maintenance extends BaseEntity {
+    private String technician;
+    private LocalDate maintenanceDate;
     private String descriptionMaint;
     private double cost;
-    private int idResourceFk;
-
-    public Maintenance(String technResponsable, int idMaintenance, String maintenanceDate, String descriptionMaint,
-            double cost, int idResourceFk) {
-        this.technResponsable = technResponsable;
-        this.idMaintenance = idMaintenance;
-        MaintenanceDate = maintenanceDate;
-        this.descriptionMaint = descriptionMaint;
-        this.cost = cost;
-        this.idResourceFk = idResourceFk;
-    }
+    private int resourceId;
 
     public Maintenance() {
     }
 
-    public String getTechnResponsable() {
-        return technResponsable;
+    public Maintenance(int id, String technician, LocalDate maintenanceDate, String descriptionMaint, double cost,
+            int resourceId) {
+        super(id);
+        this.technician = technician;
+        this.maintenanceDate = maintenanceDate;
+        this.descriptionMaint = descriptionMaint;
+        this.cost = cost;
+        this.resourceId = resourceId;
     }
 
-    public void setTechnResponsable(String technResponsable) {
-        this.technResponsable = technResponsable;
+    public String getTechnician() {
+        return technician;
     }
 
-    public int getIdMaintenance() {
-        return idMaintenance;
+    public void setTechnician(String technician) {
+        this.technician = technician;
     }
 
-    public void setIdMaintenance(int idMaintenance) {
-        this.idMaintenance = idMaintenance;
+    public LocalDate getMaintenanceDate() {
+        return maintenanceDate;
     }
 
-    public String getMaintenanceDate() {
-        return MaintenanceDate;
-    }
-
-    public void setMaintenanceDate(String maintenanceDate) {
-        MaintenanceDate = maintenanceDate;
+    public void setMaintenanceDate(LocalDate maintenanceDate) {
+        this.maintenanceDate = maintenanceDate;
     }
 
     public String getDescriptionMaint() {
@@ -62,18 +54,16 @@ public class Maintenance {
         this.cost = cost;
     }
 
-    public int getIdResourceFk() {
-        return idResourceFk;
+    public int getResourceId() {
+        return resourceId;
     }
 
-    public void setIdResourceFk(int idResourceFk) {
-        this.idResourceFk = idResourceFk;
+    public void setResourceId(int resourceId) {
+        this.resourceId = resourceId;
     }
-
-    
-    
 
     
 }
+
 
 
