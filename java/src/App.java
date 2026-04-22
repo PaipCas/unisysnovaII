@@ -1,14 +1,14 @@
 
-import model.Categories;
-import model.Participations;
-import model.Projects;
-import model.Roles;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import model.Categories;
+import model.Participations;
+import model.Projects;
+import model.Resources;
+import model.Roles;
 
 public class App {
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -17,6 +17,8 @@ public class App {
 	private static List<Categories> categoriesList = new ArrayList<>();
 	private static List<Participations> participationsList = new ArrayList<>();
 	private static List<Roles> rolesList = new ArrayList<>();
+	private static List<Resources> resourcesList = new ArrayList<>();
+	private static int resourcesId = 0;
 	private static int projectId = 0;
 	private static int categoryId = 0;
 	private static int participationId = 0;
@@ -62,6 +64,9 @@ public class App {
 				break;
 				case 4:
 				rolesMenu();
+				break;
+				case 7:
+				resourcesMenu();
 				break;
 				case 12:
 				System.out.println("Saliendo del sistema...");
@@ -309,6 +314,86 @@ public class App {
 		}
 	}
 	
+	// Resources
+	// Función para ejecutar el menú de los recursos
+	private static void resourcesMenu() {
+		int option;
+		
+		do {
+			System.out.println("\n===== MENÚ DE RECURSOS =====");
+			System.out.println("1. Crear recurso");
+			System.out.println("2. Listar recursos");
+			System.out.println("3. Volver al menú general");
+			System.out.print("Seleccione una opción: ");
+			
+			option = scanner.nextInt();
+			scanner.nextLine();
+			
+			switch (option) {
+				case 1:
+				createResource();
+				break;
+				case 2:
+				listResources();
+				break;
+				case 3:
+				generalMenu();
+				break;
+				default:
+				System.out.println("Opción inválida");
+			}
+			
+		} while (option != 3);
+	}
+	
+	// Función para crear recursos
+	private static void createResource() {
+		System.out.println("\n--- Crear Nuevo Recurso ---");
+		
+		int id = resourceId++;
+		
+		System.out.print("Locación: ");
+		String location = scanner.nextLine();
+
+		System.out.print("Fecha adquisicion (dd/mm/aaaa): ");
+		LocalDate dateAcquisition = LocalDate.parse(scanner.nextLine(), formatter);
+
+		System.out.print("Estado: ");
+		String status = scanner.nextLine();
+
+		System.out.print("Nombre del recurso: ");
+		String nameResource = scanner.nextLine();
+
+		System.out.print("Categoría del recurso: ");
+		String categoryResource = scanner.nextLine();
+		
+		
+		Resources resource = new Resources(id, location, dateAcquisition, status, nameResource, categoryResource);
+		
+		resourcesList.add(resource);
+		
+		System.out.println("Recurso creado correctamente.");
+	}
+	
+	// Función para listar recursos
+	private static void listResources() {
+		System.out.println("\n--- Lista de Recursos ---");
+		
+		if (resourcesList.isEmpty()) {
+			System.out.println("No hay recursos registrados.");
+			return;
+		}
+		
+		for (Resources r : resourcesList) {
+			System.out.println("-----------------------------");
+			System.out.println("ID: " + r.getId());
+			System.out.println("Locación: " + r.getLocation());
+			System.out.println("Fecha de adquisición: " + r.getDateAcquisition());
+			System.out.println("Estado: " + r.getStatus());
+			System.out.println("Nombre del recurso: " + r.getNameResource());
+			System.out.println("Categoría del recurso: " + r.getCategoryResource());
+		}
+	}
 	// ROLES
 	// Función para ejecutar el menú de los roles
 	private static void rolesMenu() {
@@ -372,4 +457,8 @@ public class App {
 			System.out.println("Nombre: " + r.getName());
 		}
 	}
+
+    private static void resourcesMenu() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
