@@ -69,7 +69,7 @@ public class Projects extends BaseName implements DateRange, Stateable {
 
 	@Override
 	public void setStatus(String status) {
-		if (!status.equals("Finalizado") && !status.equals("En ejecución") && !status.equals("Planificado")) {
+		if (!status.equals("Finalizado") && !status.equals("En ejecucion") && !status.equals("Planificado")) {
 			System.out.println("Estado inválido");
 			return;
 		} else {
