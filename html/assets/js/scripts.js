@@ -1,3 +1,5 @@
+hideLoader();
+
 function showPassword(button) {
 	const input = button.previousElementSibling;
 
@@ -9,4 +11,16 @@ function showPassword(button) {
 		input.type = 'password';
 		button.innerHTML = '<i class="ri-eye-line"></i>';
 	}
+}
+
+function hideLoader() {
+	window.addEventListener('load', function() {
+		const loader = document.querySelector('#loader');
+		
+		loader.style.opacity = 0;
+
+		setTimeout(() => {
+			loader.style.display = 'none';
+		}, 300);
+	});
 }
