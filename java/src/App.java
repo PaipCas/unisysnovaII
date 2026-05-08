@@ -1,10 +1,13 @@
 
 import model.Categories;
+import model.Deliverable;
 import model.Loan;
 import model.Maintenance;
 import model.Participations;
 import model.Projects;
 import model.Roles;
+import model.Person;
+import model.Sponsor;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,13 +24,15 @@ public class App {
 	private static List<Roles> rolesList = new ArrayList<>();
 	private static List<Loan> loanList = new ArrayList<>();
 	private static List<Maintenance> maintenancesList = new ArrayList<>();
+  private static List<Deliverable> deliverablesList = new ArrayList<>();
 	private static int maintenanceId = 1;
 	private static int projectId = 1;
 	private static int categoryId = 1;
 	private static int participationId = 1;
 	private static int roleId = 1;
 	private static int idLoan = 1;
-
+	private static int deliverableId = 0;
+	
 	// Inicio, general
 	public static void main(String[] args) throws Exception {
 		generalMenu();
@@ -67,14 +72,22 @@ public class App {
 					participationsMenu();
 					break;
 				case 4:
-					rolesMenu();
-					break;
+				rolesMenu();
+				break;
+				case 5:
+				personMenu();
+				break;
 				case 6:
 					loanMenu();
 					break;
 				case 8:
-					maintenanceMenu();
-					break;
+				maintenanceMenu();
+				break;
+				case 10:
+				sponsorMenu();
+				case 11:
+				deliverableMenu();
+				break;
 				case 12:
 					System.out.println("Saliendo del sistema...");
 					break;
@@ -351,8 +364,92 @@ public class App {
 			}
 
 		} while (option != 3);
-	}
 
+	}
+    private static void createPerson() {
+    System.out.println("\n--- Crear Persona ---");
+
+    Person p = new Person();
+
+    System.out.print("Nombre: ");
+    p.setName(scanner.nextLine());
+
+    System.out.print("Apellido: ");
+    p.setLastName(scanner.nextLine());
+
+    System.out.print("Email: ");
+    p.setEmail(scanner.nextLine());
+
+    p.show();
+}
+
+	private static void personMenu() {
+    int option;
+
+    do {
+        System.out.println("\n===== PERSON MENU =====");
+        System.out.println("1. Create Person");
+        System.out.println("2. Back");
+        System.out.print("Select an option: ");
+
+        option = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (option) {
+            case 1:
+                createPerson();
+                break;
+            case 2:
+                break;
+            default:
+                System.out.println("Invalid option");
+        }
+
+    } while (option != 2);
+}
+
+private static void createSponsor() {
+    System.out.println("\n--- Crear Patrocinador ---");
+
+    Sponsor s = new Sponsor();
+
+    System.out.print("Nombre: ");
+    s.setName(scanner.nextLine());
+
+    System.out.print("Tipo: ");
+    s.setType(scanner.nextLine());
+
+    System.out.print("Email: ");
+    s.setEmail(scanner.nextLine());
+
+    s.show();
+}
+
+private static void sponsorMenu() {
+    int option;
+
+    do {
+        System.out.println("\n===== SPONSOR MENU =====");
+        System.out.println("1. Create Sponsor");
+        System.out.println("2. Back");
+        System.out.print("Select an option: ");
+
+        option = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (option) {
+            case 1:
+                createSponsor();
+                break;
+            case 2:
+                break;
+            default:
+                System.out.println("Invalid option");
+        }
+
+    } while (option != 2);
+}
+	
 	// Función para crear roles
 	private static void createRole() {
 		System.out.println("\n--- Crear Nuevo Rol ---");
@@ -391,7 +488,7 @@ public class App {
 		int option;
 
 		do {
-			System.out.println("\\n===== MENÚ DE PARTICIPACIONES =====");
+			System.out.println("\\n===== MENÚ DE PRESTAMOS =====");
 			System.out.println("1. Crear préstamo");
 			System.out.println("2. Listar préstamos");
 			System.out.println("3. Volver al menú general");
@@ -547,5 +644,90 @@ public class App {
 
 		}
 	}
+
+	// ENTREGABLES
+	// Función para ejecutar el menú de las entregables
+	private static void deliverableMenu() {
+		int option;
+		
+		do {
+			System.out.println("\n===== MENÚ DE ENTREGABLES =====");
+			System.out.println("1. Crear entregable");
+			System.out.println("2. Listar entregable");
+			System.out.println("3. Volver al menú general");
+			System.out.print("Seleccione una opción: ");
+			
+			option = scanner.nextInt();
+			scanner.nextLine();
+			
+			switch (option) {
+				case 1:
+				createDeliverable();
+				break;
+				case 2:
+				listDeliverable();
+				break;
+				case 3:
+				generalMenu();
+				break;
+				default:
+				System.out.println("Opción inválida");
+			}
+			
+		} while (option != 3);
+	}
+	
+	// Función para crear entregables
+	private static void createDeliverable() {
+		System.out.println("\n--- Crear Nuevo Entregable ---");
+		
+		int id = deliverableId++;
+		
+		System.out.print("Nombre: ");
+		String name = scanner.nextLine();
+		
+		System.out.print("Fecha: ");
+		LocalDate date = LocalDate.parse(scanner.nextLine(), formatter);
+		
+		System.out.print("URL del archivo: ");
+		String urlFile = scanner.nextLine();
+
+		System.out.print("Descripcion: ");
+		String description = scanner.nextLine();
+
+		System.out.print("Tipo de entrega: ");
+		String typeDeliv = scanner.nextLine();
+
+		System.out.print("ID projecto: ");
+		int projectId = scanner.nextInt();
+		
+		Deliverable deliverable = new Deliverable(id, name, date, urlFile, description, typeDeliv, projectId);
+		
+		deliverablesList.add(deliverable);
+		
+		System.out.println("Entrega creada correctamente.");
+	}
+	
+	// Función para listar entregables
+	private static void listDeliverable() {
+		System.out.println("\n--- Lista de entregable ---");
+		
+		if (deliverablesList.isEmpty()) {
+			System.out.println("No hay entregables registrados.");
+			return;
+		}
+		
+		for (Deliverable d : deliverablesList) {
+			System.out.println("-----------------------------");
+			System.out.println("ID: " + d.getId());
+			System.out.println("Date: " + d.getDate());
+			System.out.println("URL archivo: " + d.getUrlFile());
+			System.out.println("Descripcion: " + d.getDescription());
+			System.out.println("Tipo de entregable: "+ d.getTypeDeliv());
+			System.out.println("ID proyecto: " + d.getProjectId());
+		}
+	}
+
+	
 
 }
