@@ -28,11 +28,10 @@ public class Projects extends BaseName implements DateRange, Stateable {
 
 	public void setDescription(String description) {
 		if (description != null && description.length() > 500) {
-			System.out.println("El nombre es demasiado largo");
-			return;
-		} else {
-			this.description = description;
+			throw new IllegalArgumentException("La descripción es demasiado larga");
 		}
+
+		this.description = description;
 	}
 
 	@Override
@@ -42,11 +41,10 @@ public class Projects extends BaseName implements DateRange, Stateable {
 
 	public void setStartDate(LocalDate startDate) {
 		if (startDate == null) {
-			System.out.println("Fecha de inicio obligatoria");
-			return;
-		} else {
-			this.startDate = startDate;
+			throw new IllegalArgumentException("Fecha de inicio obligatoria");
 		}
+
+		this.startDate = startDate;
 	}
 
 	@Override
@@ -55,10 +53,10 @@ public class Projects extends BaseName implements DateRange, Stateable {
 	}
 
 	public void setEndDate(LocalDate endDate) {
-		if (endDate != null & this.startDate != null && endDate.isBefore(this.startDate)) {
-			System.out.println("La fecha de fin no puede ser menor que la de inicio");
-			return;
+		if (endDate != null && this.startDate != null && endDate.isBefore(this.startDate)) {
+			throw new IllegalArgumentException("La fecha de fin no puede ser menor que la de inicio");
 		}
+
 		this.endDate = endDate;
 	}
 
@@ -70,11 +68,10 @@ public class Projects extends BaseName implements DateRange, Stateable {
 	@Override
 	public void setStatus(String status) {
 		if (!status.equals("Finalizado") && !status.equals("En ejecucion") && !status.equals("Planificado")) {
-			System.out.println("Estado inválido");
-			return;
-		} else {
-			this.status = status;
+			throw new IllegalArgumentException("Estado inválido");
 		}
+
+		this.status = status;
 	}
 
 	public int getCategoryId() {
@@ -83,10 +80,9 @@ public class Projects extends BaseName implements DateRange, Stateable {
 
 	public void setCategoryId(int categoryId) {
 		if (categoryId <= 0) {
-			System.out.println("Categoría inválida");
-			return;
-		} else {
-			this.categoryId = categoryId;
+			throw new IllegalArgumentException("Categoría inválida");
 		}
+
+		this.categoryId = categoryId;
 	}
 }

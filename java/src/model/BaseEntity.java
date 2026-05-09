@@ -16,10 +16,9 @@ public abstract class BaseEntity {
 
 	public void setId(int id) {
 		if (id <= 0) {
-			System.out.println("Id inválido");
-			return;
-		} else {
-			this.id = id;
+			throw new IllegalArgumentException("Id inválido");
 		}
+		
+		this.id = id;
 	}
 }

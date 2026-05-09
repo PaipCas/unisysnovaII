@@ -21,11 +21,10 @@ public class Participations extends BaseEntity {
 
 	public void setProjectId(int projectId) {
 		if (projectId <= 0) {
-			System.out.println("Id del proyecto inválido");
-			return;
-		} else {
-			this.projectId = projectId;
+			throw new IllegalArgumentException("Id del proyecto inválido");
 		}
+		
+		this.projectId = projectId;
 	}
 
 	public int getPersonId() {
@@ -34,11 +33,10 @@ public class Participations extends BaseEntity {
 
 	public void setPersonId(int personId) {
 		if (personId <= 0) {
-			System.out.println("Id de la persona inválido");
-			return;
-		} else {
-			this.personId = personId;
+			throw new IllegalArgumentException("Id de la persona inválido");
 		}
+		
+		this.personId = personId;
 	}
 
 	public int getProjectRoleId() {
@@ -47,10 +45,9 @@ public class Participations extends BaseEntity {
 
 	public void setProjectRoleId(int projectRoleId) {
 		if (projectRoleId <= 0) {
-			System.out.println("Id del rol inválido");
-			return;
-		} else {
-			this.projectRoleId = projectRoleId;
+			throw new IllegalArgumentException("Id del rol inválido");
 		}
+		
+		this.projectRoleId = projectRoleId;
 	}
 }
