@@ -1,8 +1,8 @@
-package model;
+package com.unisysnova.projects.model;
 
 import java.time.LocalDate;
 
-public class Deliverable extends BaseEntity{
+public class Deliverable extends BaseEntity {
     private String name;
     private LocalDate date;
     private String urlFile;
@@ -13,9 +13,8 @@ public class Deliverable extends BaseEntity{
     public Deliverable() {
     }
 
-    public Deliverable(int id, String name, LocalDate date, String urlFile, String description, String typeDeliv,
+    public Deliverable(String name, LocalDate date, String urlFile, String description, String typeDeliv,
             int projectId) {
-        super(id);
         this.name = name;
         this.date = date;
         this.urlFile = urlFile;
@@ -71,8 +70,5 @@ public class Deliverable extends BaseEntity{
     public void setProjectId(int projectId) {
         this.projectId = projectId;
     }
-    
 
 }
-
-

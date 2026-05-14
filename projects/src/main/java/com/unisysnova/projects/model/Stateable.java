@@ -1,4 +1,4 @@
-package model;
+package com.unisysnova.projects.model;
 
 public interface Stateable {
 	String getStatus();

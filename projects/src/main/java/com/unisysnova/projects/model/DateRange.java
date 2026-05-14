@@ -1,4 +1,4 @@
-package model;
+package com.unisysnova.projects.model;
 
 import java.time.LocalDate;
 

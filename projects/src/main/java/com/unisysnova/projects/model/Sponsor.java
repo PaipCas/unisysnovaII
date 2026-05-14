@@ -1,17 +1,17 @@
-package model;
+package com.unisysnova.projects.model;
 
-public class Person {
+public class Sponsor {
 
     private String name;
-    private String lastName;
+    private String type;
     private String email;
 
     public String getName() {
         return name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getType() {
+        return type;
     }
 
     public String getEmail() {
@@ -26,11 +26,11 @@ public class Person {
         }
     }
 
-    public void setLastName(String lastName) {
-        if (lastName != null && lastName.length() >= 3) {
-            this.lastName = lastName;
+    public void setType(String type) {
+        if (type != null && !type.isEmpty()) {
+            this.type = type;
         } else {
-            System.out.println("Invalid last name");
+            System.out.println("Invalid type");
         }
     }
 
@@ -43,6 +43,6 @@ public class Person {
     }
 
     public void show() {
-        System.out.println("Person: " + name + " " + lastName + " - " + email);
+        System.out.println("Sponsor: " + name + " - " + type + " - " + email);
     }
 }
