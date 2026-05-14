@@ -1,4 +1,4 @@
-package model;
+package com.unisysnova.projects.model;
 
 import java.time.LocalDate;
 
@@ -9,9 +9,8 @@ public class Loan extends BaseEntity implements Stateable, DateRange{
 	private LocalDate deliverytDate;
 	private LocalDate bookDate;
 
-    public Loan(int id, String status, int personId, int resourceId, LocalDate deliverytDate,
+    public Loan(String status, int personId, int resourceId, LocalDate deliverytDate,
             LocalDate bookDate) {
-        super(id);
         this.status = status;
         this.personId = personId;
         this.resourceId = resourceId;

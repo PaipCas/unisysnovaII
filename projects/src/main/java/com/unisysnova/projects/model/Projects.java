@@ -1,25 +1,41 @@
-package model;
+package com.unisysnova.projects.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table
 public class Projects extends BaseName implements DateRange, Stateable {
+	@Column(nullable = true, length = 200)
 	private String description;
+
+	@Column(nullable = false)
 	private LocalDate startDate;
+
+	@Column(nullable = false)
 	private LocalDate endDate;
+
+	@Column(nullable = false, length = 50)
 	private String status;
-	private int categoryId;
+
+	@ManyToOne
+	@JoinColumn(name = "categoryId")
+	private Categories categories;
 
 	public Projects() {
 	}
 
-	public Projects(int id, String name, String description, LocalDate startDate, LocalDate endDate, String status,
-			int categoryId) {
-		super(id, name);
+	public Projects(String name, String description, LocalDate startDate, LocalDate endDate, String status) {
+		super(name);
 		setDescription(description);
 		setStartDate(startDate);
 		setEndDate(endDate);
 		setStatus(status);
-		setCategoryId(categoryId);
 	}
 
 	public String getDescription() {
@@ -72,17 +88,5 @@ public class Projects extends BaseName implements DateRange, Stateable {
 		}
 
 		this.status = status;
-	}
-
-	public int getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(int categoryId) {
-		if (categoryId <= 0) {
-			throw new IllegalArgumentException("Categoría inválida");
-		}
-
-		this.categoryId = categoryId;
 	}
 }

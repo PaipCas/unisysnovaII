@@ -1,4 +1,4 @@
-package model;
+package com.unisysnova.projects.model;
 
 import java.time.LocalDate;
 
@@ -12,9 +12,8 @@ public class Maintenance extends BaseEntity {
     public Maintenance() {
     }
 
-    public Maintenance(int id, String technician, LocalDate maintenanceDate, String descriptionMaint, double cost,
+    public Maintenance(String technician, LocalDate maintenanceDate, String descriptionMaint, double cost,
             int resourceId) {
-        super(id);
         this.technician = technician;
         this.maintenanceDate = maintenanceDate;
         this.descriptionMaint = descriptionMaint;

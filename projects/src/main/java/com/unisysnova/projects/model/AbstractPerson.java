@@ -1,4 +1,4 @@
-package model;
+package com.unisysnova.projects.model;
 
 public abstract class AbstractPerson extends BaseName {
 	protected String email;
@@ -7,8 +7,8 @@ public abstract class AbstractPerson extends BaseName {
 	public AbstractPerson() {
 	}
 
-	public AbstractPerson(int id, String name, String email, String phone) {
-		super(id, name);
+	public AbstractPerson(String name, String email, String phone) {
+		super(name);
 		this.email = email;
 		this.phone = phone;
 	}

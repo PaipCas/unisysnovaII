@@ -1,13 +1,17 @@
-package model;
+package com.unisysnova.projects.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class BaseName extends BaseEntity {
+	@Column(nullable = false, length = 30)
 	protected String name;
 
 	public BaseName() {
 	}
 
-	public BaseName(int id, String name) {
-		super(id);
+	public BaseName(String name) {
 		setName(name);
 	}
 
